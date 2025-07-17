@@ -1,24 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
+
+
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterslayerMask;
 
     private bool isWalking;
     private Vector3 lastInteractDir;
-
+    private ClearCounter selectedCounter;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("error");
+        }
+        Instance = this;
+    }
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
+
+    //按e触发的事件,触发的是ClearCounter对象的交互
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+        if (selectedCounter != null)
+        {
+            selectedCounter.Interact();
+        }
     }
 
     private void Update()
@@ -40,15 +64,35 @@ public class Player : MonoBehaviour
         float interactDistance = 2f;
 
         Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 1f);
+        //靠近物体，物体变得虚化，离开物体虚化消失
 
+        //1.检测到物体
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterslayerMask))
         {
+            //获得到了相应类型的物体
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                //是新物体
+                if (clearCounter != selectedCounter)
+                {
+
+                    //使其变虚化
+                    SetSelectedCounter(clearCounter);
+
+                }
+
+            }
+            else
+            {
+                SetSelectedCounter(null);
             }
         }
-        
+        //2.没有检测到物体，或者离开物体
+        else
+        {
+            SetSelectedCounter(null);
+        }
+
 
     }
 
@@ -95,5 +139,10 @@ public class Player : MonoBehaviour
     public bool IsWalking()
     {
         return isWalking;
+    }
+    private void SetSelectedCounter(ClearCounter selectedCounterd)
+    {
+        this.selectedCounter = selectedCounterd;
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounterd });
     }
 }
