@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter,IKitchenObjectParant
+public class ContainerCounter : BaseCounter,IKitchenObjectParant
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter scendClearCounter;
-    // Start is called before the first frame update
     private KitchenObject kitchenObject;
-
-   
     public void Interact(Player player)
     {
         //通过kitchenObjectSO获得食物实体prefab通过实体中的kitchenObject脚本获得相关属性
@@ -25,8 +21,8 @@ public class ClearCounter : BaseCounter,IKitchenObjectParant
         //卓子上有食物，但是按e了，食物需要到角色的手上
         else
         {
-            
-            if (Player.Instance.GetKitchenObject()==null)
+
+            if (Player.Instance.GetKitchenObject() == null)
             {
                 kitchenObject.SetKitchenObjectParant(player);
             }
@@ -50,6 +46,6 @@ public class ClearCounter : BaseCounter,IKitchenObjectParant
     }
     public bool HasKitchenObject()
     {
-        return  kitchenObject != null;
+        return kitchenObject != null;
     }
 }
