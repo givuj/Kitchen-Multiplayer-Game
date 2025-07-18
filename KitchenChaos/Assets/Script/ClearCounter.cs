@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour
+public class ClearCounter : MonoBehaviour,IKitchenObjectParant
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     [SerializeField] private Transform counterTopPoint;
@@ -10,18 +10,8 @@ public class ClearCounter : MonoBehaviour
     // Start is called before the first frame update
     private KitchenObject kitchenObject;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (kitchenObject != null)
-            {
-                kitchenObject.SetClearCounter(scendClearCounter);
-            }
-        }
-
-    }
-    public void Interact()
+   
+    public void Interact(Player player)
     {
         //通过kitchenObjectSO获得食物实体prefab通过实体中的kitchenObject脚本获得相关属性
         if (kitchenObject == null)
@@ -29,8 +19,17 @@ public class ClearCounter : MonoBehaviour
 
             Transform kitchenObjectTranform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
 
-            kitchenObjectTranform.GetComponent<KitchenObject>().SetClearCounter(this);
+            kitchenObjectTranform.GetComponent<KitchenObject>().SetKitchenObjectParant(this);
 
+        }
+        //卓子上有食物，但是按e了，食物需要到角色的手上
+        else
+        {
+            
+            if (Player.Instance.GetKitchenObject()==null)
+            {
+                kitchenObject.SetKitchenObjectParant(player);
+            }
         }
     }
     public Transform GetKitchenObjectFollowTransform()
@@ -51,7 +50,6 @@ public class ClearCounter : MonoBehaviour
     }
     public bool HasKitchenObject()
     {
-        Debug.Log("2");
         return  kitchenObject != null;
     }
 }
