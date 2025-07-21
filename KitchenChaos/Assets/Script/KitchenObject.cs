@@ -21,9 +21,12 @@ public class KitchenObject : MonoBehaviour
         {
             Debug.LogError("已经有食物了");
         }
-        kitchenObjectParant.SetKitchenObject(this);
-        transform.parent = kitchenObjectParant.GetKitchenObjectFollowTransform();//这段代码还会导致位置的改变
-        transform.localPosition = Vector3.zero;
+        else
+        {
+            kitchenObjectParant.SetKitchenObject(this);
+            transform.parent = kitchenObjectParant.GetKitchenObjectFollowTransform();//这段代码还会导致位置的改变
+            transform.localPosition = Vector3.zero;
+        }
     }
     public IKitchenObjectParant GetKitchenObjectParant()
     {

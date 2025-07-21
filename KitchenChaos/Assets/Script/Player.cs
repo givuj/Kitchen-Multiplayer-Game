@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour,IKitchenObjectParant
+public class Player : BaseCounter,IKitchenObjectParant
 {
     public static Player Instance { get; private set; }
 
@@ -11,7 +11,7 @@ public class Player : MonoBehaviour,IKitchenObjectParant
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
 
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour,IKitchenObjectParant
 
     private bool isWalking;
     private Vector3 lastInteractDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
     private void Awake()
     {
@@ -73,14 +73,14 @@ public class Player : MonoBehaviour,IKitchenObjectParant
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterslayerMask))
         {
             //获得到了相应类型的物体
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
                 //是新物体
-                if (clearCounter != selectedCounter)
+                if (baseCounter != selectedCounter)
                 {
 
                     //使其变虚化
-                    SetSelectedCounter(clearCounter);
+                    SetSelectedCounter(baseCounter);
 
                 }
 
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour,IKitchenObjectParant
         return isWalking;
     }
    
-    private void SetSelectedCounter(ClearCounter selectedCounterd)
+    private void SetSelectedCounter(BaseCounter selectedCounterd)
     {
         this.selectedCounter = selectedCounterd;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounterd });

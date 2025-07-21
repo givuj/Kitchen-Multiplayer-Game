@@ -5,51 +5,31 @@ using UnityEngine;
 public class ClearCounter : BaseCounter,IKitchenObjectParant
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter scendClearCounter;
-    // Start is called before the first frame update
-    private KitchenObject kitchenObject;
+   
 
    
-    public void Interact(Player player)
+    public override void Interact(Player player)
     {
-        //通过kitchenObjectSO获得食物实体prefab通过实体中的kitchenObject脚本获得相关属性
-        if (kitchenObject == null)
+        //如果柜台没有物品就能放东西
+        if(!HasKitchenObject())
         {
-
-            Transform kitchenObjectTranform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
-
-            kitchenObjectTranform.GetComponent<KitchenObject>().SetKitchenObjectParant(this);
-
+            if (player.HasKitchenObject())//人物手中有食物
+            {
+                player.GetKitchenObject().SetKitchenObjectParant(this);
+            }
         }
-        //卓子上有食物，但是按e了，食物需要到角色的手上
+        //如果柜台有物品
         else
         {
-            
-            if (Player.Instance.GetKitchenObject()==null)
+            if(player.HasKitchenObject())//人物手中没有食物
             {
-                kitchenObject.SetKitchenObjectParant(player);
+
+            }
+            else//手中没有食物就可以拿柜台上的食物
+            {
+                GetKitchenObject().SetKitchenObjectParant(player);
             }
         }
     }
-    public Transform GetKitchenObjectFollowTransform()
-    {
-        return counterTopPoint;
-    }
-    public void SetKitchenObject(KitchenObject kitchenObject)
-    {
-        this.kitchenObject = kitchenObject;
-    }
-    public KitchenObject GetKitchenObject()
-    {
-        return kitchenObject;
-    }
-    public void ClearKitchenObject()
-    {
-        kitchenObject = null;
-    }
-    public bool HasKitchenObject()
-    {
-        return  kitchenObject != null;
-    }
+
 }

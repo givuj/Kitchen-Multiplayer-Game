@@ -2,17 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour
+
+//父类
+public class BaseCounter : MonoBehaviour,IKitchenObjectParant
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private Transform counterTopPoint;
+    private KitchenObject kitchenObject;
+    public virtual void Interact(Player player)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    //接口实现
+    public Transform GetKitchenObjectFollowTransform()//获得顶点的位置
     {
-        
+        return counterTopPoint;
+    }
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
+    }
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
     }
 }

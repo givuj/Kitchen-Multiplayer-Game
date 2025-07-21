@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ad6b30da3f4f2488d274cdbd85de9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tomatoPrefab: {fileID: 0}
+  kitchenObjectSO: {fileID: 0}
   counterTopPoint: {fileID: 0}
+  scendClearCounter: {fileID: 0}
 --- !u!1001 &7423773196344247774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,8 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce51efa2196c844e8c0754879bb84e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 8436389550701850446}
-  VisualGameObject: {fileID: 1353738966740174481}
+  baseCounter: {fileID: 8436389550701850446}
+  VisualGameObjectArray:
+  - {fileID: 1353738966740174481}
 --- !u!4 &6392711668363108725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4589716710238282923, guid: 0004cb1e11ad014419b943c7da960724,
