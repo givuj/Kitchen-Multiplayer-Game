@@ -23,7 +23,7 @@ public class Player : BaseCounter
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
-    private KitchenObject kitchenObject;
+    //private KitchenObject kitchenObject;
     private void Awake()
     {
         if (Instance != null)
