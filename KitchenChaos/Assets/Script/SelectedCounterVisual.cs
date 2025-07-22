@@ -13,6 +13,8 @@ public class Select : MonoBehaviour
         
     }
 
+
+    //靠近物体使物体变虚化
     private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e)
     {
       

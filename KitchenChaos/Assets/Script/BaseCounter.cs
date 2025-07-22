@@ -13,6 +13,10 @@ public class BaseCounter : MonoBehaviour,IKitchenObjectParant
     {
 
     }
+    public virtual void InteractF(Player player)
+    {
+
+    }
 
     //接口实现
     public Transform GetKitchenObjectFollowTransform()//获得顶点的位置

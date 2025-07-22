@@ -10,6 +10,8 @@ public class KitchenObject : MonoBehaviour
     {
         return kitchenObjectSO;
     }
+
+    //设置食物放在哪里
     public void SetKitchenObjectParant(IKitchenObjectParant kitchenObjectParant)//多态实现给的其实是接口对象，只是ClearCounter或player实现了IKitchenObjectParant接口
     {
         if (this.kitchenObjectParant != null)//清除柜台之前的食物,之前柜台的食物数据还在
@@ -31,5 +33,20 @@ public class KitchenObject : MonoBehaviour
     public IKitchenObjectParant GetKitchenObjectParant()
     {
         return kitchenObjectParant;
+    }
+    public void DestorySelf()
+    {
+        kitchenObjectParant.ClearKitchenObject();
+        Destroy(gameObject);
+
+    }
+
+    //转移食物
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSo,IKitchenObjectParant kitchenObjectParant)
+    {
+        Transform KitchenObjectTransform = Instantiate(kitchenObjectSo.prefab);
+        KitchenObject kitchenObject = KitchenObjectTransform.GetComponent<KitchenObject>();
+        kitchenObject.SetKitchenObjectParant(kitchenObjectParant);
+        return kitchenObject;
     }
 }

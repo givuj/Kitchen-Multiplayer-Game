@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : BaseCounter,IKitchenObjectParant
+public class Player : BaseCounter
 {
     public static Player Instance { get; private set; }
 
@@ -18,7 +18,7 @@ public class Player : BaseCounter,IKitchenObjectParant
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterslayerMask;
-    [SerializeField] private Transform kitchenObjectHoldPoint;
+    
 
     private bool isWalking;
     private Vector3 lastInteractDir;
@@ -35,7 +35,15 @@ public class Player : BaseCounter,IKitchenObjectParant
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
-        Debug.Log(kitchenObjectHoldPoint);
+        gameInput.OnInteractActionF += GameInput_OnInteractActionF;
+    }
+
+    private void GameInput_OnInteractActionF(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractF(this);
+        }
     }
 
 
@@ -52,6 +60,7 @@ public class Player : BaseCounter,IKitchenObjectParant
     {
         HandleMovement();
         HandleInteraction();
+        
     }
 
     //碰撞检测后获得碰撞物体的对象
@@ -114,7 +123,7 @@ public class Player : BaseCounter,IKitchenObjectParant
         if (!canMove)
         {
             Vector3 moveDirx = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
+            canMove = moveDir.x!=0&&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirx;
@@ -122,7 +131,7 @@ public class Player : BaseCounter,IKitchenObjectParant
             else
             {
                 Vector3 moveDirz = new Vector3(0, 0, moveDir.z);
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
+                canMove = moveDir.z!=0&&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirz;
@@ -150,26 +159,8 @@ public class Player : BaseCounter,IKitchenObjectParant
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounterd });
     }
 
+    //接口实现
+      
+   
 
-
-    public Transform GetKitchenObjectFollowTransform()
-    {
-        return kitchenObjectHoldPoint;
-    }
-    public void SetKitchenObject(KitchenObject kitchenObject)
-    {
-        this.kitchenObject = kitchenObject;
-    }
-    public KitchenObject GetKitchenObject()
-    {
-        return kitchenObject;
-    }
-    public void ClearKitchenObject()
-    {
-        kitchenObject = null;
-    }
-    public bool HasKitchenObject()
-    {
-        return kitchenObject != null;
-    }
 }
