@@ -14,12 +14,8 @@ public class CuttingCounter : BaseCounter
     public event EventHandler OnCut;
 
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
-    public int cuttingProgress=0;//切菜的进程
+    private int cuttingProgress=0;//切菜的进程
 
-    public void Update()
-    {
-        Debug.Log(cuttingProgress);
-    }
     public override void Interact(Player player)
     {
         //如果柜台没有物品就能放东西

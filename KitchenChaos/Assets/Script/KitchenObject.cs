@@ -41,7 +41,7 @@ public class KitchenObject : MonoBehaviour
 
     }
 
-    //转移食物
+    //转移食物,第一个属性是食物，第二个属性是counter或者player
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSo,IKitchenObjectParant kitchenObjectParant)
     {
         Transform KitchenObjectTransform = Instantiate(kitchenObjectSo.prefab);
