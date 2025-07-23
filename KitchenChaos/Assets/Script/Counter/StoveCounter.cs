@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static CuttingCounter;
 
 public class StoveCounter : BaseCounter
 {
 
-
-    private enum State
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
+    public class OnStateChangedEventArgs : EventArgs
+    {
+        public State state;
+    }
+    public enum State
     {
         Idle,
         Frying,
@@ -45,6 +50,7 @@ public class StoveCounter : BaseCounter
                     burningRecipeSO = GetburningRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
                 
                     bunringTimer = 0f;
+                    OnStateChanged?.Invoke(this,new OnStateChangedEventArgs { state = state});
                 }
                 break;
             case State.Fried:
@@ -56,7 +62,7 @@ public class StoveCounter : BaseCounter
                     GetKitchenObject().DestorySelf();
                     KitchenObject.SpawnKitchenObject(burningRecipeSO.output, this);
                     state = State.Burned;
-
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 }
                 break;
             case State.Burned:
@@ -79,7 +85,7 @@ public class StoveCounter : BaseCounter
                     fryingRecipeSO = GetfryingRecipeSOWithInput(player.GetKitchenObject().GetKitchenObjectSO());
                     player.GetKitchenObject().SetKitchenObjectParant(this);//把肉饼放在炉子上
                     state = State.Frying;
-
+                    OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });    
 
                 }
             }
@@ -94,6 +100,8 @@ public class StoveCounter : BaseCounter
             else//手中没有食物就可以拿柜台上的食物
             {
                 GetKitchenObject().SetKitchenObjectParant(player);
+                state = State.Idle;
+                OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
             }
         }
     }
