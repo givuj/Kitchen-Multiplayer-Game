@@ -17,23 +17,39 @@ public class ClearCounter : BaseCounter
             {
                 player.GetKitchenObject().SetKitchenObjectParant(this);
             }
+            else
+            {
+
+            }
         }
         //如果柜台有物品
         else
         {
-            if(player.HasKitchenObject())//人物手中有食物
+            if(player.HasKitchenObject())//人物手中有东西
             {
-                if(player.GetKitchenObject() is PlateKichenObject)//人物手中是盘子
+                if(player.GetKitchenObject().TryGetPlate(out PlateKichenObject plateKichenObject))//人物手中是盘子
                 {
-                    PlateKichenObject plateKichenObject = player.GetKitchenObject() as PlateKichenObject;
+                  
                     if (plateKichenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))//将食物放入盘子中,不能重复放入
                     {
                         GetKitchenObject().DestorySelf();
                     }
                    
                 }
+                else//手中的不是盘子，手中是食物
+                {
+                    if(GetKitchenObject().TryGetPlate(out  plateKichenObject))//如果柜子上盘子，并且手中有食物
+                    {
+                        Debug.Log("桌子上是盘子");
+                        if (plateKichenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))//将食物放入盘子中,不能重复放入
+                        {
+                            Debug.Log("1");
+                            player.GetKitchenObject().DestorySelf();
+                        }
+                    }
+                }
             }
-            else//手中没有食物就可以拿柜台上的食物
+            else//手中没有东西就可以拿柜台上的物品
             {
                 GetKitchenObject().SetKitchenObjectParant(player);
             }

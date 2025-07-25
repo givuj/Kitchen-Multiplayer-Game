@@ -41,6 +41,22 @@ public class KitchenObject : MonoBehaviour
 
     }
 
+    public bool TryGetPlate(out PlateKichenObject plateKichenObject)
+    {
+        if (this is PlateKichenObject)
+        {
+            plateKichenObject = this as PlateKichenObject;
+            return true;
+        }
+        else
+        {
+            plateKichenObject = null;
+            return false;
+        }
+
+         
+    }
+
     //转移食物,第一个属性是食物，第二个属性是counter或者player
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSo,IKitchenObjectParant kitchenObjectParant)
     {

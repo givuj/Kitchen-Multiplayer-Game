@@ -93,14 +93,26 @@ public class StoveCounter : BaseCounter,IHasProgress
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = fryingTimer / fryingRecipeSO.fryingTimerMax });
                 }
             }
-          
+
         }
         //如果柜台有物品
         else
         {
-            if (player.HasKitchenObject())//人物手中没有食物
+            if (player.HasKitchenObject())//人物手中有食物
             {
+                if (player.GetKitchenObject().TryGetPlate(out PlateKichenObject plateKichenObject))//人物手中是盘子
+                {
 
+                    if (plateKichenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))//将食物放入盘子中,不能重复放入
+                    {
+                        GetKitchenObject().DestorySelf();
+                        state = State.Idle;
+                        OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
+                        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = 0f });
+                    }
+
+
+                }
             }
             else//手中没有食物就可以拿柜台上的食物
             {
@@ -109,6 +121,7 @@ public class StoveCounter : BaseCounter,IHasProgress
                 OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { state = state });
                 OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = 0f });
             }
+
         }
     }
 
