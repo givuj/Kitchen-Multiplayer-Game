@@ -40,10 +40,10 @@ public class ClearCounter : BaseCounter
                 {
                     if(GetKitchenObject().TryGetPlate(out  plateKichenObject))//如果柜子上盘子，并且手中有食物
                     {
-                        Debug.Log("桌子上是盘子");
+                        
                         if (plateKichenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))//将食物放入盘子中,不能重复放入
                         {
-                            Debug.Log("1");
+                           
                             player.GetKitchenObject().DestorySelf();
                         }
                     }
