@@ -13,6 +13,7 @@ public class PlatesCounter : BaseCounter
     private float spawnPlateTimerMax = 4f;
     private int platesSpawnedAmout;
     private int platesSpawnedAmoutMax = 4;
+    
     private void Update()
     {
         spawnPlateTimer += Time.deltaTime;

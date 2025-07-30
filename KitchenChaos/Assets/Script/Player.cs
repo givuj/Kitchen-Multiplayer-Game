@@ -6,9 +6,10 @@ using UnityEngine;
 public class Player : BaseCounter
 {
     public static Player Instance { get; private set; }
-
+ 
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public event EventHandler OnPickSometing;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
         public BaseCounter selectedCounter;
@@ -40,6 +41,7 @@ public class Player : BaseCounter
 
     private void GameInput_OnInteractActionF(object sender, EventArgs e)
     {
+        if (!GameMagager.Instance.IsGamePlaying()) { return; }
         if (selectedCounter != null)
         {
             selectedCounter.InteractF(this);
@@ -50,6 +52,7 @@ public class Player : BaseCounter
     //按e触发的事件,触发的是ClearCounter对象的交互
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
+        if (!GameMagager.Instance.IsGamePlaying()) { return; }
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
@@ -160,7 +163,14 @@ public class Player : BaseCounter
     }
 
     //接口实现
-      
-   
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+        if(kitchenObject!=null)
+        {
+            OnPickSometing?.Invoke(this,EventArgs.Empty);
+        }
+    }
+
 
 }

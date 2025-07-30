@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1753753094
+  lastShownTimestamp: 1753839721
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1753753094
+  checkedLastUpdateTimestamp: 1753839721
   lastQOTDResponse:
     questionId: 205
     questionText: 'Is this valid code?
@@ -29,7 +29,7 @@ MonoBehaviour:
     answerC: 
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1753753094
+  lastQotdTimestamp: 1753839721
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ONLY THIS SUMMER!
@@ -37,11 +37,11 @@ MonoBehaviour:
     bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
       OFF right now!
     bottomLink: toolkit
-  lastDynamicHeaderTimestamp: 1753753094
+  lastDynamicHeaderTimestamp: 1753839721
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1753753094
+  websiteLatestMessageTimestamp: 1753839721
   websiteLatestVideos:
     videos:
     - youTubeId: K-AjBKP4uq0
@@ -52,4 +52,4 @@ MonoBehaviour:
       title: TOP 10 NEW Systems and Tools JUNE 2025! | Unity Asset Store
     - youTubeId: oBCXk_6Fft0
       title: This MISTAKE cost $28,000,000!
-  websiteLatestVideosTimestamp: 1753753094
+  websiteLatestVideosTimestamp: 1753839721

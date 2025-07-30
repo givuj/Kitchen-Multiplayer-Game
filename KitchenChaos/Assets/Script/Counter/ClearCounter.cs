@@ -10,6 +10,7 @@ public class ClearCounter : BaseCounter
    
     public override void Interact(Player player)
     {
+       
         //如果柜台没有物品就能放东西
         if(!HasKitchenObject())
         {
