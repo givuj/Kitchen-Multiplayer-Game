@@ -9,13 +9,13 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Score;
     private void Start()
     {
-        GameMagager.Instance.OnStateChanged += Instance_OnStateChanged;
+        GameManager.Instance.OnStateChanged += Instance_OnStateChanged;
         Hide();
     }
 
     private void Instance_OnStateChanged(object sender, System.EventArgs e)
     {
-        if (GameMagager.Instance.IsGameOver())
+        if (GameManager.Instance.IsGameOver())
         {
             Show();
             Score.text = DeliveryManager.Instance.GetScore().ToString();

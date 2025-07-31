@@ -8,6 +8,6 @@ public class GamePlayingClockUI : MonoBehaviour
     [SerializeField] private Image timerImage;
     private void Update()
     {
-       timerImage.fillAmount =  GameMagager.Instance.GetGamePlayingTimerNormalized();
+       timerImage.fillAmount = GameManager.Instance.GetGamePlayingTimerNormalized();
     }
 }

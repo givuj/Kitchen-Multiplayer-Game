@@ -9,12 +9,12 @@ public class StartCountdownUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countdownText;
     private void Start()
     {
-        GameMagager.Instance.OnStateChanged += Instance_OnStateChanged;
+        GameManager.Instance.OnStateChanged += Instance_OnStateChanged;
     }
 
     private void Instance_OnStateChanged(object sender, System.EventArgs e)
     {
-        if(GameMagager.Instance.IsCountdownToStartActive())
+        if(GameManager.Instance.IsCountdownToStartActive())
         {
             Show();
         }
@@ -25,7 +25,7 @@ public class StartCountdownUI : MonoBehaviour
     }
     private void Update()
     {
-        countdownText.text = Mathf.Ceil(GameMagager.Instance.CountdownToStartTimer()) .ToString();
+        countdownText.text = Mathf.Ceil(GameManager.Instance.CountdownToStartTimer()) .ToString();
     }
     private void Show()
     {

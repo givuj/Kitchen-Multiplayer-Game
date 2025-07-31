@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMagager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static GameMagager Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
     public event EventHandler OnStateChanged;
+    public event EventHandler OnGamePause;
+    public event EventHandler OnGameUnPause;
     private enum State
     {
         WaitingToStart,
@@ -19,11 +21,22 @@ public class GameMagager : MonoBehaviour
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer = 0f;
     private float gamePlayingTimerMax = 10f;
+    private bool isGamePaused = false;
     private void Awake()
     {
         Instance = this;
         state = State.WaitingToStart;
     }
+    private void Start()
+    {
+        GameInput.Instance.OnPauseAction += Instance_OnPauseAction;
+    }
+
+    private void Instance_OnPauseAction(object sender, EventArgs e)
+    {
+        PauseGame();
+    }
+
     private void Update()
     {
         switch (state)
@@ -78,5 +91,19 @@ public class GameMagager : MonoBehaviour
     {
         
         return 1-(gamePlayingTimer/gamePlayingTimerMax);
+    }
+    public void PauseGame()
+    {
+        isGamePaused = !isGamePaused;
+        if(isGamePaused)
+        {
+            OnGamePause?.Invoke(this,EventArgs.Empty);
+            Time.timeScale = 0f; 
+        }
+        else
+        {
+            OnGameUnPause?.Invoke(this, EventArgs.Empty);
+            Time.timeScale = 1f;
+        }
     }
 }

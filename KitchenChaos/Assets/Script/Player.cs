@@ -41,7 +41,7 @@ public class Player : BaseCounter
 
     private void GameInput_OnInteractActionF(object sender, EventArgs e)
     {
-        if (!GameMagager.Instance.IsGamePlaying()) { return; }
+        if (!GameManager.Instance.IsGamePlaying()) { return; }
         if (selectedCounter != null)
         {
             selectedCounter.InteractF(this);
@@ -52,7 +52,7 @@ public class Player : BaseCounter
     //按e触发的事件,触发的是ClearCounter对象的交互
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        if (!GameMagager.Instance.IsGamePlaying()) { return; }
+        if (!GameManager.Instance.IsGamePlaying()) { return; }
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
