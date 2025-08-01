@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class ResetStaticDataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()//awake是这个场景启动时执行，不是项目启动时执行
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CuttingCounter.ResetStaticData();
+        BaseCounter.ResetStaticData();
     }
 }

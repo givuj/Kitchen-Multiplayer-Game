@@ -21,8 +21,8 @@ public class GameInput : MonoBehaviour
     }
     private void OnDestroy()
     {
-        playerInputActions.Player.Interact.performed -= Interact_performed;//按e触发某些东西
-        playerInputActions.Player.InteractF.performed -= InteractF_performed;         //按f触发某些东西
+        playerInputActions.Player.Interact.performed -= Interact_performed;
+        playerInputActions.Player.InteractF.performed -= InteractF_performed;        
         playerInputActions.Player.Pause.performed -= Pause_performed;
         playerInputActions.Dispose();
     }

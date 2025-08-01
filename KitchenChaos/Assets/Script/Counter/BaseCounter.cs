@@ -11,6 +11,10 @@ public class BaseCounter : MonoBehaviour,IKitchenObjectParant
     [SerializeField] private Transform counterTopPoint;
     protected KitchenObject kitchenObject;
     public static event EventHandler OnAnyObjectPlaceHere;
+    public static void ResetStaticData()
+    {
+        OnAnyObjectPlaceHere = null;
+    }
     public virtual void Interact(Player player)
     {
 
