@@ -38,8 +38,8 @@ public class OptionUI : MonoBehaviour
     private void UpdateVisual()
     {
         
-        soundEffectsText.text = "Sound Effects:" + Mathf.Round(SoundManager.Instance.GetVolume()*10f);  
-        musicText.text = "Music :" + Mathf.Round(MusicManager.Instance.GetVolume() * 10f);
+        soundEffectsText.text = "“Ù–ß:" + Mathf.Round(SoundManager.Instance.GetVolume()*10f);  
+        musicText.text = "“Ù¿÷ :" + Mathf.Round(MusicManager.Instance.GetVolume() * 10f);
     }
 
     public void Show()
