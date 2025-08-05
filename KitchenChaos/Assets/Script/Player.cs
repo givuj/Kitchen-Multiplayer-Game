@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : BaseCounter
+public class Player : NetworkBehaviour,IKitchenObjectParant
 {
-    public static Player Instance { get; private set; }
- 
+    //public static Player Instance { get; private set; }
+
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public event EventHandler OnPickSometing;
@@ -17,26 +18,26 @@ public class Player : BaseCounter
 
 
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private GameInput gameInput;
+    //[SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterslayerMask;
-    
+
 
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
-    //private KitchenObject kitchenObject;
+    private KitchenObject kitchenObject;
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("error");
-        }
-        Instance = this;
+        //if (Instance != null)
+        //{
+        //    Debug.LogError("error");
+        //}
+        //Instance = this;
     }
     private void Start()
     {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
-        gameInput.OnInteractActionF += GameInput_OnInteractActionF;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractActionF += GameInput_OnInteractActionF;
     }
 
     private void GameInput_OnInteractActionF(object sender, EventArgs e)
@@ -63,13 +64,13 @@ public class Player : BaseCounter
     {
         HandleMovement();
         HandleInteraction();
-        
+
     }
 
     //碰撞检测后获得碰撞物体的对象
     private void HandleInteraction()
     {
-        Vector2 inputVector = gameInput.GameMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GameMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);//方向
         if (moveDir != Vector3.zero)
         {
@@ -114,7 +115,7 @@ public class Player : BaseCounter
     //碰撞检查
     private void HandleMovement()
     {
-        Vector2 inputVector = gameInput.GameMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GameMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -126,7 +127,7 @@ public class Player : BaseCounter
         if (!canMove)
         {
             Vector3 moveDirx = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = moveDir.x!=0&&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirx;
@@ -134,7 +135,7 @@ public class Player : BaseCounter
             else
             {
                 Vector3 moveDirz = new Vector3(0, 0, moveDir.z);
-                canMove = moveDir.z!=0&&!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
+                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirz;
@@ -155,7 +156,7 @@ public class Player : BaseCounter
     {
         return isWalking;
     }
-   
+
     private void SetSelectedCounter(BaseCounter selectedCounterd)
     {
         this.selectedCounter = selectedCounterd;
@@ -166,11 +167,29 @@ public class Player : BaseCounter
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
-        if(kitchenObject!=null)
+        if (kitchenObject != null)
         {
-            OnPickSometing?.Invoke(this,EventArgs.Empty);
+            OnPickSometing?.Invoke(this, EventArgs.Empty);
         }
     }
 
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        throw new NotImplementedException();
+    }
 
+    public KitchenObject GetKitchenObject()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ClearKitchenObject()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool HasKitchenObject()
+    {
+        throw new NotImplementedException();
+    }
 }

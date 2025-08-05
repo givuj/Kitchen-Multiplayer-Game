@@ -9,7 +9,7 @@ public class Select : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        //Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
         
     }
 

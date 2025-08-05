@@ -36,14 +36,6 @@ public class DeliveryResultUI : MonoBehaviour
         backgroundImage.color = failedColor;
         iconImage.sprite = failedSprite;
         messageText.text = "Ìá½»Ê§°Ü";
-        while(duringTime>duringTimeMax)
-        {
-            gameObject.SetActive(false);
-            duringTime += Time.deltaTime;
-            
-        }
-        duringTime = 0f;
-
     }
 
     private void Instance_OnRecipeSuccess(object sender, System.EventArgs e)

@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
         DeliveryManager.Instance.OnRecipeSuccess += Instance_OnRecipeSuccess;
         DeliveryManager.Instance.OnRecipeFailed += Instance_OnRecipeFailed;
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
-        Player.Instance.OnPickSometing += Instance_OnPickSometing;
+        //Player.Instance.OnPickSometing += Instance_OnPickSometing;
         BaseCounter.OnAnyObjectPlaceHere += ClearCounter_OnAnyObjectPlaceHere;
     }
 
@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
 
     private void Instance_OnPickSometing(object sender, System.EventArgs e)
     {
-        PlaySound(autioClipRefsSO.objectPickup, Player.Instance.transform.position);
+        //PlaySound(autioClipRefsSO.objectPickup, Player.Instance.transform.position);
     }
 
     private void CuttingCounter_OnAnyCut(object sender, System.EventArgs e)
@@ -62,7 +62,10 @@ public class SoundManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(audioClip, position, volum2*volume);
     }
-   
+    public void PlayWarningSound(Vector3 position)
+    {
+        PlaySound(autioClipRefsSO.warning, position);
+    }
     public void ChangerVolum()
     {
         volume += .1f;
