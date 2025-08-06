@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextingNetcodeUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Button startHostButton;
+    [SerializeField] private Button startClientButton;
+    private void Awake()
     {
-        
+        startHostButton.onClick.AddListener(() =>
+        { Debug.Log("HOST"); NetworkManager.Singleton.StartHost(); Hide(); });
+        startClientButton.onClick.AddListener(() =>
+        { Debug.Log("CLIENT"); NetworkManager.Singleton.StartClient(); Hide(); });
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Hide()
     {
-        
+        gameObject.SetActive(false);
     }
 }

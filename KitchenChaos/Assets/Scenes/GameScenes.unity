@@ -5662,6 +5662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5fe27bd38bf5044a77aa552c220689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHostButton: {fileID: 416100123}
+  startClientButton: {fileID: 147758303}
 --- !u!1001 &1555851906
 PrefabInstance:
   m_ObjectHideFlags: 0

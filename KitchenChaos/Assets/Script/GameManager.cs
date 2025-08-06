@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
     }
     private State state;
     private float waitingToStartTimer = 1f;
-    private float countdownToStartTimer = 3f;
+    private float countdownToStartTimer = 1f;
     private float gamePlayingTimer = 0f;
-    private float gamePlayingTimerMax = 40f;
+    private float gamePlayingTimerMax = 300f;
     private bool isGamePaused = false;
     private void Awake()
     {
@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameInput.Instance.OnPauseAction += Instance_OnPauseAction;
+        state = State.CountdownToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Instance_OnPauseAction(object sender, EventArgs e)

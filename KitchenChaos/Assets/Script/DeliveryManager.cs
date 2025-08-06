@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.Netcode;
 using UnityEngine;
 
-public class DeliveryManager : MonoBehaviour
+public class DeliveryManager : NetworkBehaviour
 {
 
     public event EventHandler OnRecipeSpawned;
@@ -25,14 +26,19 @@ public class DeliveryManager : MonoBehaviour
     }
     private void Update()
     {
+        if(!IsServer)
+        {
+            return;
+        }
         spawnRecipeTimer -= Time.deltaTime;
         if (spawnRecipeTimer <= 0f)
         {
             spawnRecipeTimer = spawnRecipeTimerMax;
-            if(waitingRecipeSOList.Count<waitingRecipesMax)
+            if(waitingRecipeSOList.Count<waitingRecipesMax&&GameManager.Instance.IsGamePlaying())
             {
-                
+
                 RecipeSO waitingRecipeSO = recipeListSO.RecipeSOList[UnityEngine.Random.Range(0, recipeListSO.RecipeSOList.Count)];
+
                 Debug.Log(waitingRecipeSO.recipeName);
                 waitingRecipeSOList.Add(waitingRecipeSO);
                 OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
