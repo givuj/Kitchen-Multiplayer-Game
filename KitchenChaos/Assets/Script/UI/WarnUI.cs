@@ -19,6 +19,7 @@ public class WarnUI : MonoBehaviour
         if(show)
         {
             Show();
+            Debug.Log("1");
         }
         else
         {
