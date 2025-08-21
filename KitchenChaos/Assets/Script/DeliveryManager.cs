@@ -15,7 +15,7 @@ public class DeliveryManager : NetworkBehaviour
     public static DeliveryManager Instance { get; private set; }
     [SerializeField] private RecipeListSO recipeListSO;//这里面有食物，如汉堡，沙拉
     private List<RecipeSO> waitingRecipeSOList;//这里面有食物所需的配方，如汉堡需要，肉和面包
-    private float spawnRecipeTimer;
+    private float spawnRecipeTimer=4f;
     private float spawnRecipeTimerMax = 4f;
     private int waitingRecipesMax = 4;
     private int Score = 0;
@@ -37,13 +37,18 @@ public class DeliveryManager : NetworkBehaviour
             if(waitingRecipeSOList.Count<waitingRecipesMax&&GameManager.Instance.IsGamePlaying())
             {
 
-                RecipeSO waitingRecipeSO = recipeListSO.RecipeSOList[UnityEngine.Random.Range(0, recipeListSO.RecipeSOList.Count)];
-
-                Debug.Log(waitingRecipeSO.recipeName);
-                waitingRecipeSOList.Add(waitingRecipeSO);
-                OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
+                int waitintRecipeSOIndex = UnityEngine.Random.Range(0, recipeListSO.RecipeSOList.Count);
+                SpawnNewWaitingRecipeClientRpc(waitintRecipeSOIndex);
+            
             }
         }
+    }
+    [ClientRpc]
+    private void SpawnNewWaitingRecipeClientRpc(int waitintRecipeSOIndex)
+    {
+        RecipeSO waitingRecipeSO = recipeListSO.RecipeSOList[waitintRecipeSOIndex];
+        waitingRecipeSOList.Add(waitingRecipeSO);
+        OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     //判断盘子中的食物配方是不是顾客需要的食物配方，如汉堡，沙拉

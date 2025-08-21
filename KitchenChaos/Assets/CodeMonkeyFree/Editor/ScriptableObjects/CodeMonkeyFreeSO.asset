@@ -14,40 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1754556534
+  lastShownTimestamp: 1755754891
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1754556534
+  checkedLastUpdateTimestamp: 1755754891
   lastQOTDResponse:
-    questionId: 208
-    questionText: Which namespace do we need to use File.WriteAllText()?
-    answerA: using System;
-    answerB: using UnityEngine;
-    answerC: using System.IO;
-    answerD: using UnityEngine.UI;
+    questionId: 213
+    questionText: What is the purpose of a namespace?
+    answerA: To confuse you
+    answerB: Better performance
+    answerC: Keep your code organized
+    answerD: 
     answerE: 
-  lastQotdTimestamp: 1754556534
+  lastQotdTimestamp: 1755754891
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
     topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ONLY THIS SUMMER!
     topLink: summer2025bundle
     bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
       OFF right now!
     bottomLink: toolkit
-  lastDynamicHeaderTimestamp: 1754556534
+  lastDynamicHeaderTimestamp: 1755754891
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1754556534
+  websiteLatestMessageTimestamp: 1755754891
   websiteLatestVideos:
     videos:
-    - youTubeId: y-w3vnh_f4Q
-      title: Are Old Tutorials OBSOLETE?
-    - youTubeId: DaKW4kqFlao
-      title: How to LEARN new Skills on HARD MODE!
-    - youTubeId: ubBS7vTQlVo
-      title: Cooking is HARDER than Programming!
-    - youTubeId: kWRCB-R2Yrg
-      title: TOP 20 Visual Assets to INSPIRE YOU! (JULY 2025)
-  websiteLatestVideosTimestamp: 1754556534
+    - youTubeId: x4BTbeKinSI
+      title: TOP 10 FREE NEW Assets AUGUST 2025!
+    - youTubeId: HZ48JOAf-Ko
+      title: Did I STOP making TUTORIALS?
+    - youTubeId: XJsidUVPOCY
+      title: TOP 10 NEW Games, Made with Unity! (JULY 2025)
+    - youTubeId: CZ5rsOwgcl4
+      title: Unity 6.2 is HERE!
+  websiteLatestVideosTimestamp: 1755754891
